@@ -1,12 +1,15 @@
 package home.projects.groceryshop.service;
 
 import home.projects.groceryshop.domain.Product;
+import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.persistance.ProductRepository;
 import home.projects.groceryshop.transfer.SaveProductRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -31,5 +34,21 @@ public class ProductService {
         product.setImageUrl(request.getImageUrl());
 
         return productRepository.save(product);
+    }
+
+    public Product getProduct(long id) {
+        LOGGER.info("Retrieving product {}", id);
+
+//      //optional usage
+//        Optional<Product> productOptional = productRepository.findById(id);
+//
+//        if (productOptional.isPresent()) {
+//            return productOptional.get();
+//        } else {
+//            throw new ResourceNotFoundException("Product " + id + " not found.");
+//        }
+
+        return productRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Product " + id + "not found."));
     }
 }
