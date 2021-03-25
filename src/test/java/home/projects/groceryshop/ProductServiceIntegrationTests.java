@@ -1,8 +1,10 @@
 package home.projects.groceryshop;
 
 import home.projects.groceryshop.domain.Product;
+import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.service.ProductService;
 import home.projects.groceryshop.transfer.SaveProductRequest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,18 +23,7 @@ public class ProductServiceIntegrationTests {
 
     @Test
     void createProduct_whenValidRequest_thenProductIsCreated() {
-        SaveProductRequest request = new SaveProductRequest();
-        request.setName("Coca-Cola");
-        request.setQuantity(10);
-        request.setPrice(1.2);
-
-        Product product = productService.createProduct(request);
-
-        assertThat(product, notNullValue());
-        assertThat(product.getId(), greaterThan(0L));
-        assertThat(product.getName(), is(request.getName()));
-        assertThat(product.getQuantity(), is(request.getQuantity()));
-        assertThat(product.getPrice(), is(request.getPrice()));
+        createProduct();
     }
 
     @Test
@@ -47,6 +38,43 @@ public class ProductServiceIntegrationTests {
             assertThat(e, notNullValue());
             assertThat("Unexpected exception type", e instanceof TransactionSystemException);
         }
+    }
 
+    @Test
+    void getProductWhenExistingProduct_thenReturnProduct() {
+        Product product = createProduct();
+
+        Product response = productService.getProduct(product.getId());
+
+        assertThat(response, notNullValue());
+        assertThat(response.getId(), is(product.getId()));
+        assertThat(response.getName(), is(product.getName()));
+        assertThat(response.getPrice(), is(product.getPrice()));
+        assertThat(response.getQuantity(), is(product.getQuantity()));
+        assertThat(response.getDescription(), is(product.getDescription()));
+        assertThat(response.getImageUrl(), is(product.getImageUrl()));
+    }
+
+    @Test
+    void getProduct_whenNonExistingProduct_thanThrowResourceNotFoundException() {
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () ->
+                productService.getProduct(216565));
+    }
+
+    private Product createProduct() {
+        SaveProductRequest request = new SaveProductRequest();
+        request.setName("Coca-Cola");
+        request.setQuantity(10);
+        request.setPrice(1.2);
+
+        Product product = productService.createProduct(request);
+
+        assertThat(product, notNullValue());
+        assertThat(product.getId(), greaterThan(0L));
+        assertThat(product.getName(), is(request.getName()));
+        assertThat(product.getQuantity(), is(request.getQuantity()));
+        assertThat(product.getPrice(), is(request.getPrice()));
+        return product;
     }
 }
