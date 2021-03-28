@@ -3,7 +3,7 @@ package home.projects.groceryshop;
 import home.projects.groceryshop.domain.Product;
 import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.service.ProductService;
-import home.projects.groceryshop.transfer.SaveProductRequest;
+import home.projects.groceryshop.transfer.product.SaveProductRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

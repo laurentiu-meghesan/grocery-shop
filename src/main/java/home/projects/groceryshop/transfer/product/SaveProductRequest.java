@@ -1,4 +1,4 @@
-package home.projects.groceryshop.transfer;
+package home.projects.groceryshop.transfer.product;
 
 import javax.validation.constraints.NotNull;
 
