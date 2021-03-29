@@ -36,7 +36,7 @@ public class ProductServiceIntegrationTests {
             productService.createProduct(request);
         } catch (Exception e) {
             assertThat(e, notNullValue());
-            assertThat("Unexpected exception type", e instanceof TransactionSystemException);
+            assertThat("Unexpected exception type.", e instanceof TransactionSystemException);
         }
     }
 
