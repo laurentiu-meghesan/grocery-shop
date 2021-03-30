@@ -2,6 +2,7 @@ package home.projects.groceryshop.service;
 
 import home.projects.groceryshop.domain.Cart;
 import home.projects.groceryshop.domain.Customer;
+import home.projects.groceryshop.domain.Product;
 import home.projects.groceryshop.persistance.CartRepository;
 import home.projects.groceryshop.transfer.cart.AddProductsToCartRequest;
 import org.slf4j.Logger;
@@ -18,11 +19,13 @@ public class CartService {
 
     private final CartRepository cartRepository;
     private final CustomerService customerService;
+    private final ProductService productService;
 
     @Autowired
-    public CartService(CartRepository cartRepository, CustomerService customerService) {
+    public CartService(CartRepository cartRepository, CustomerService customerService, ProductService productService) {
         this.cartRepository = cartRepository;
         this.customerService = customerService;
+        this.productService = productService;
     }
 
     @Transactional
@@ -37,6 +40,10 @@ public class CartService {
             cart.setCustomer(customer);
         }
 
+        for (Long id : request.getProductIds()) {
+            Product product = productService.getProduct(id);
+            cart.addProductToCart(product);
+        }
         cartRepository.save(cart);
     }
 }
