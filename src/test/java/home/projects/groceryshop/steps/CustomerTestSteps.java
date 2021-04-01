@@ -21,6 +21,9 @@ public class CustomerTestSteps {
         SaveCustomerRequest request = new SaveCustomerRequest();
         request.setFirstName("FirstName");
         request.setLastName("LastName");
+        request.setPhoneNumber("0753951753");
+        request.setAddress("Downing Street, No. 75");
+        request.setEmail("user@email.com");
 
         Customer customer = customerService.createCustomer(request);
 
@@ -28,6 +31,9 @@ public class CustomerTestSteps {
         assertThat(customer.getId(), greaterThan(0L));
         assertThat(customer.getFirstName(), is(request.getFirstName()));
         assertThat(customer.getLastName(), is(request.getLastName()));
+        assertThat(customer.getPhoneNumber(), is(request.getPhoneNumber()));
+        assertThat(customer.getAddress(), is(request.getAddress()));
+        assertThat(customer.getEmail(), is(request.getEmail()));
 
         return customer;
     }
