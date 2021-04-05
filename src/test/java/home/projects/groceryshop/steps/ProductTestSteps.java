@@ -2,6 +2,7 @@ package home.projects.groceryshop.steps;
 
 import home.projects.groceryshop.domain.Product;
 import home.projects.groceryshop.service.ProductService;
+import home.projects.groceryshop.transfer.product.ProductResponse;
 import home.projects.groceryshop.transfer.product.SaveProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,13 +18,13 @@ public class ProductTestSteps {
     @Autowired
     private ProductService productService;
 
-    public Product createProduct() {
+    public ProductResponse createProduct() {
         SaveProductRequest request = new SaveProductRequest();
         request.setName("Coca-Cola");
         request.setQuantity(10);
         request.setPrice(1.2);
 
-        Product product = productService.createProduct(request);
+        ProductResponse product = productService.createProduct(request);
 
         assertThat(product, notNullValue());
         assertThat(product.getId(), greaterThan(0L));

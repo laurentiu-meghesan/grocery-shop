@@ -4,6 +4,7 @@ import home.projects.groceryshop.domain.Product;
 import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.service.ProductService;
 import home.projects.groceryshop.steps.ProductTestSteps;
+import home.projects.groceryshop.transfer.product.ProductResponse;
 import home.projects.groceryshop.transfer.product.SaveProductRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -46,9 +47,9 @@ public class ProductServiceIntegrationTests {
 
     @Test
     void getProductWhenExistingProduct_thenReturnProduct() {
-        Product product = productTestSteps.createProduct();
+        ProductResponse product = productTestSteps.createProduct();
 
-        Product response = productService.getProduct(product.getId());
+        ProductResponse response = productService.getProduct(product.getId());
 
         assertThat(response, notNullValue());
         assertThat(response.getId(), is(product.getId()));
@@ -68,14 +69,14 @@ public class ProductServiceIntegrationTests {
 
     @Test
     void updateProduct_whenValidRequest_thenReturnUpdatedProduct() {
-        Product product = productTestSteps.createProduct();
+        ProductResponse product = productTestSteps.createProduct();
         SaveProductRequest request = new SaveProductRequest();
         request.setName(product.getName() + " updated.");
         request.setDescription(product.getName() + " updated.");
         request.setPrice(product.getPrice() + 10);
         request.setQuantity(product.getQuantity() + 10);
 
-        Product updatedProduct = productService.updateProduct(product.getId(), request);
+        ProductResponse updatedProduct = productService.updateProduct(product.getId(), request);
 
         assertThat(updatedProduct, notNullValue());
         assertThat(updatedProduct.getId(), is(product.getId()));
@@ -87,7 +88,7 @@ public class ProductServiceIntegrationTests {
 
     @Test
     void deleteProduct_whenExistingProduct_thenProductDoesNotExistAnymore() {
-        Product product = productTestSteps.createProduct();
+        ProductResponse product = productTestSteps.createProduct();
 
         productService.deleteProduct(product.getId());
 

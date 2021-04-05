@@ -25,7 +25,7 @@ public class Cart {
         product.getCarts().add(this);
     }
 
-    public void deleteProductFromCart(Product product) {
+    public void removeProductFromCart(Product product) {
         products.remove(product);
 
         product.getCarts().remove(this);

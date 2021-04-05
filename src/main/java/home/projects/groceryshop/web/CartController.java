@@ -3,6 +3,7 @@ package home.projects.groceryshop.web;
 import home.projects.groceryshop.service.CartService;
 import home.projects.groceryshop.transfer.cart.AddProductsToCartRequest;
 import home.projects.groceryshop.transfer.cart.CartResponse;
+import home.projects.groceryshop.transfer.cart.RemoveProductsFromCartRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @CrossOrigin
-@RequestMapping("/carts")
+@RequestMapping("/")
 @RestController
 public class CartController {
 
@@ -28,9 +29,15 @@ public class CartController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/carts/{id}")
     public ResponseEntity<CartResponse> getCart(@PathVariable(name = "id") long customerId) {
         CartResponse cart = cartService.getCart(customerId);
         return new ResponseEntity<>(cart, HttpStatus.OK);
+    }
+
+    @PutMapping("/carts/")
+    public ResponseEntity<Void> removeProductFromCart(@Valid @RequestBody RemoveProductsFromCartRequest request) {
+        cartService.removeProductFromCart(request);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

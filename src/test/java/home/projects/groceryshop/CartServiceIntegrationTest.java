@@ -8,6 +8,7 @@ import home.projects.groceryshop.steps.ProductTestSteps;
 import home.projects.groceryshop.transfer.cart.AddProductsToCartRequest;
 import home.projects.groceryshop.transfer.cart.CartResponse;
 import home.projects.groceryshop.transfer.cart.ProductInCartResponse;
+import home.projects.groceryshop.transfer.product.ProductResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +37,7 @@ public class CartServiceIntegrationTest {
     void addProductsToCartWhenNewCart_thenCartIsCreated(){
         Customer customer = customerTestSteps.createCustomer();
 
-        Product product = productTestSteps.createProduct();
+        ProductResponse product = productTestSteps.createProduct();
 
         AddProductsToCartRequest cartRequest = new AddProductsToCartRequest();
         cartRequest.setCustomerId(customer.getId());
