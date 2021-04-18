@@ -8,6 +8,7 @@ import home.projects.groceryshop.steps.ProductTestSteps;
 import home.projects.groceryshop.transfer.cart.AddProductsToCartRequest;
 import home.projects.groceryshop.transfer.cart.CartResponse;
 import home.projects.groceryshop.transfer.cart.ProductInCartResponse;
+import home.projects.groceryshop.transfer.cart.RemoveProductsFromCartRequest;
 import home.projects.groceryshop.transfer.product.ProductResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,21 @@ public class CartServiceIntegrationTest {
         assertThat(nextProduct.getId(), is(product.getId()));
         assertThat(nextProduct.getName(), is(product.getName()));
         assertThat(nextProduct.getPrice(), is(product.getPrice()));
+    }
+
+    @Test
+    void removeProductsFromCart() {
+        Customer customer = customerTestSteps.createCustomer();
+//        customer.setId(11L);
+
+        ProductResponse product = productTestSteps.createProduct();
+//        product.setId(32L);
+
+        RemoveProductsFromCartRequest cartRequest = new RemoveProductsFromCartRequest();
+        cartRequest.setCustomerId(customer.getId());
+        cartRequest.setProductId(product.getId());
+
+//        cartService.removeProductFromCart(cartRequest);
+
     }
 }

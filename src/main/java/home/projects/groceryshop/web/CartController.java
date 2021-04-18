@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @CrossOrigin
-@RequestMapping("/")
+@RequestMapping("/carts")
 @RestController
 public class CartController {
 
@@ -29,13 +29,13 @@ public class CartController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/carts/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CartResponse> getCart(@PathVariable(name = "id") long customerId) {
         CartResponse cart = cartService.getCart(customerId);
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    @PutMapping("/carts/")
+    @DeleteMapping("/cart_product")
     public ResponseEntity<Void> removeProductFromCart(@Valid @RequestBody RemoveProductsFromCartRequest request) {
         cartService.removeProductFromCart(request);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
