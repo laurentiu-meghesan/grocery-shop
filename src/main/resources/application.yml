@@ -7,3 +7,9 @@ spring:
     url: jdbc:mysql://localhost:3306/grocery-shop
     username: grocery-shop-admin
     password: grocery-shop-admin
+#  security:
+#    user:
+#      name: user
+#      password: 1234
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
