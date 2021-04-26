@@ -1,6 +1,7 @@
 package home.projects.groceryshop.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
@@ -8,7 +9,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
     private String userName;
+    @NotNull
     private String password;
     private boolean active;
     private String roles;
@@ -21,7 +24,7 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
+    String getUserName() {
         return userName;
     }
 
@@ -29,7 +32,7 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
@@ -37,7 +40,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
+    boolean isActive() {
         return active;
     }
 
@@ -45,7 +48,7 @@ public class User {
         this.active = active;
     }
 
-    public String getRoles() {
+    String getRoles() {
         return roles;
     }
 
