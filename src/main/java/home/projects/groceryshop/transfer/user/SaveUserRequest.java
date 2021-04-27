@@ -1,28 +1,15 @@
-package home.projects.groceryshop.domain;
+package home.projects.groceryshop.transfer.user;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class User {
+public class SaveUserRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @NotNull
     private String userName;
     @NotNull
     private String password;
     private boolean active;
     private String roles;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;
@@ -40,7 +27,7 @@ public class User {
         this.password = password;
     }
 
-    boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 

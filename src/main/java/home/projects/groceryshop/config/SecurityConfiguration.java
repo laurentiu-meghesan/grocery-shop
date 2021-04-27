@@ -1,6 +1,8 @@
 package home.projects.groceryshop.config;
 
+import home.projects.groceryshop.persistance.UserRepository;
 import home.projects.groceryshop.service.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -16,9 +18,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final UserRepository userRepository;
+
+    @Autowired
+    public SecurityConfiguration(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyUserDetailsService();
+        return new MyUserDetailsService(userRepository);
     }
 
     @Bean
