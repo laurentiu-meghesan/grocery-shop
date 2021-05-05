@@ -9,6 +9,7 @@ import home.projects.groceryshop.transfer.cart.AddProductsToCartRequest;
 import home.projects.groceryshop.transfer.cart.CartResponse;
 import home.projects.groceryshop.transfer.cart.ProductInCartResponse;
 import home.projects.groceryshop.transfer.cart.RemoveProductsFromCartRequest;
+import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.product.ProductResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class CartServiceIntegrationTest {
 
     @Test
     void addProductsToCartWhenNewCart_thenCartIsCreated(){
-        Customer customer = customerTestSteps.createCustomer();
+        CustomerResponse customer = customerTestSteps.createCustomer();
 
         ProductResponse product = productTestSteps.createProduct();
 
@@ -68,7 +69,7 @@ public class CartServiceIntegrationTest {
 
     @Test
     void removeProductsFromCart() {
-        Customer customer = customerTestSteps.createCustomer();
+        CustomerResponse customer = customerTestSteps.createCustomer();
 //        customer.setId(11L);
 
         ProductResponse product = productTestSteps.createProduct();

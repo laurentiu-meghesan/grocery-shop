@@ -1,27 +1,13 @@
-package home.projects.groceryshop.domain;
+package home.projects.groceryshop.transfer.customer;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+public class CustomerResponse {
 
-@Entity
-public class Customer {
-
-    @Id
     private long id;
-    @NotNull
     private String firstName;
-    @NotNull
     private String lastName;
-    @NotNull
     private String phoneNumber;
-    @NotNull
     private String address;
-    @NotNull
     private String email;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private User user;
 
     public long getId() {
         return id;
@@ -71,17 +57,9 @@ public class Customer {
         this.email = email;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerResponse{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

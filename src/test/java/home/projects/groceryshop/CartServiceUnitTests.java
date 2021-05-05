@@ -50,7 +50,7 @@ public class CartServiceUnitTests {
         customer.setFirstName("FirstName");
         customer.setLastName("LastName");
 
-        when(customerService.getCustomer(anyLong())).thenReturn(customer);
+        when(customerService.findCustomer(anyLong())).thenReturn(customer);
 
         Product product = new Product();
         product.setId(2);
@@ -70,7 +70,7 @@ public class CartServiceUnitTests {
         cartService.addProductsToCart(request);
 
         verify(cartRepository).findById(anyLong());
-        verify(customerService).getCustomer(anyLong());
+        verify(customerService).findCustomer(anyLong());
         verify(productService).findProduct(anyLong());
         verify(cartRepository).save(any(Cart.class));
     }

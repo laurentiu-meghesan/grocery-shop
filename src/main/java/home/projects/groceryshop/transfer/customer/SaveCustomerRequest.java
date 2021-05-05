@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class SaveCustomerRequest {
 
+    private long userId;
     @NotNull
     private String firstName;
     @NotNull
@@ -14,6 +15,14 @@ public class SaveCustomerRequest {
     private String address;
     @NotNull
     private String email;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -58,7 +67,8 @@ public class SaveCustomerRequest {
     @Override
     public String toString() {
         return "SaveCustomerRequest{" +
-                "firstName='" + firstName + '\'' +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +

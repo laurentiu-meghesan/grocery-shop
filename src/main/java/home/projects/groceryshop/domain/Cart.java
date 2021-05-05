@@ -11,7 +11,7 @@ public class Cart {
     private long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @MapsId(value = "user_id")
     private Customer customer;
 
     @ManyToMany(cascade = CascadeType.MERGE)

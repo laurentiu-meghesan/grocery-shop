@@ -2,6 +2,7 @@ package home.projects.groceryshop.web;
 
 import home.projects.groceryshop.domain.Customer;
 import home.projects.groceryshop.service.CustomerService;
+import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.customer.SaveCustomerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,24 +24,24 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody SaveCustomerRequest request) {
-        Customer customer = customerService.createCustomer(request);
+    public ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody SaveCustomerRequest request) {
+        CustomerResponse customer = customerService.createCustomer(request);
         return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable long id) {
-        Customer customer = customerService.getCustomer(id);
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable long id) {
+        CustomerResponse customer = customerService.getUser(id);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @Valid @RequestBody SaveCustomerRequest request) {
-        Customer customer = customerService.updateCustomer(id, request);
+    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable long id, @Valid @RequestBody SaveCustomerRequest request) {
+        CustomerResponse customer = customerService.updateCustomer(id, request);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
         customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

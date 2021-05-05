@@ -1,7 +1,9 @@
 package home.projects.groceryshop.steps;
 
 import home.projects.groceryshop.domain.Customer;
+import home.projects.groceryshop.domain.User;
 import home.projects.groceryshop.service.CustomerService;
+import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.customer.SaveCustomerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,15 +19,21 @@ public class CustomerTestSteps {
     @Autowired
     private CustomerService customerService;
 
-    public Customer createCustomer() {
+    @Autowired
+    private UserTestSteps userTestSteps;
+
+    public CustomerResponse createCustomer() {
+        User user = userTestSteps.createUser();
+        
         SaveCustomerRequest request = new SaveCustomerRequest();
+        request.setUserId(user.getId());
         request.setFirstName("FirstName");
         request.setLastName("LastName");
         request.setPhoneNumber("0753951753");
         request.setAddress("Downing Street, No. 75");
         request.setEmail("user@email.com");
 
-        Customer customer = customerService.createCustomer(request);
+        CustomerResponse customer = customerService.createCustomer(request);
 
         assertThat(customer, notNullValue());
         assertThat(customer.getId(), greaterThan(0L));

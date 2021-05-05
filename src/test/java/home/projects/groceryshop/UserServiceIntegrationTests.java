@@ -5,6 +5,7 @@ import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.exception.UserAlreadyExistAuthenticationException;
 import home.projects.groceryshop.persistance.UserRepository;
 import home.projects.groceryshop.service.UserService;
+import home.projects.groceryshop.steps.UserTestSteps;
 import home.projects.groceryshop.transfer.user.ChangeUserPasswordRequest;
 import home.projects.groceryshop.transfer.user.SaveUserRequest;
 import org.junit.jupiter.api.Assertions;
@@ -23,27 +24,12 @@ public class UserServiceIntegrationTests {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserTestSteps userTestSteps;
+
     @Test
     void createUser_whenValidRequest_thenUserIsCreated() {
-        createUser();
-    }
-
-    private User createUser() {
-        SaveUserRequest request = new SaveUserRequest();
-        request.setUserName("user7");
-        request.setPassword("0000");
-        request.setActive(true);
-        request.setRoles("USER");
-
-        User user = userService.createUser(request);
-
-        assertThat(user, notNullValue());
-        assertThat(user.getId(), greaterThan(0L));
-        assertThat(user.getUserName(), is(request.getUserName()));
-        assertThat(user.getPassword(), is(request.getPassword()));
-        assertThat(user.getRoles(), is(request.getRoles()));
-
-        return user;
+        userTestSteps.createUser();
     }
 
     @Test
@@ -65,7 +51,7 @@ public class UserServiceIntegrationTests {
     @Test
     void changeUserPassword_whenValidRequest_thenReturnUpdatedUser() {
 
-        User user = createUser();
+        User user = userTestSteps.createUser();
 
         ChangeUserPasswordRequest request = new ChangeUserPasswordRequest();
         request.setOldPassword(user.getPassword());
@@ -80,8 +66,7 @@ public class UserServiceIntegrationTests {
 
     @Test
     void deleteUser_whenExistingUser_thenUserDoesNotExistAnymore() {
-
-        User user = createUser();
+        User user = userTestSteps.createUser();
 
         userService.deleteUser(user.getId());
 

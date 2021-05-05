@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class ReviewService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReviewService.class);
 
     private final ReviewRepository reviewRepository;
 

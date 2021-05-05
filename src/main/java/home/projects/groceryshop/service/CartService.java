@@ -21,7 +21,7 @@ import java.util.Set;
 @Service
 public class CartService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartService.class);
 
     private final CartRepository cartRepository;
     private final CustomerService customerService;
@@ -41,7 +41,7 @@ public class CartService {
         Cart cart = cartRepository.findById(request.getCustomerId()).orElse(new Cart());
 
         if (cart.getCustomer() == null) {
-            Customer customer = customerService.getCustomer(request.getCustomerId());
+            Customer customer = customerService.findCustomer(request.getCustomerId());
 
             cart.setCustomer(customer);
         }
