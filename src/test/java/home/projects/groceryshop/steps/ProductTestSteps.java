@@ -1,6 +1,5 @@
 package home.projects.groceryshop.steps;
 
-import home.projects.groceryshop.domain.Product;
 import home.projects.groceryshop.service.ProductService;
 import home.projects.groceryshop.transfer.product.ProductResponse;
 import home.projects.groceryshop.transfer.product.SaveProductRequest;

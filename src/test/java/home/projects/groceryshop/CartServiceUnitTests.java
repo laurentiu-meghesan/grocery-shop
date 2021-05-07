@@ -46,7 +46,7 @@ public class CartServiceUnitTests {
         when(cartRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         Customer customer = new Customer();
-        customer.setId(1);
+        customer.setId(2);
         customer.setFirstName("FirstName");
         customer.setLastName("LastName");
 

@@ -36,7 +36,7 @@ public class CartService {
 
     @Transactional
     public void addProductsToCart(AddProductsToCartRequest request) {
-        LOGGER.info("Adding products to cart: {}", request);
+        LOGGER.info("Adding product {} to cart {}", request.getProductIds(), request.getCustomerId());
 
         Cart cart = cartRepository.findById(request.getCustomerId()).orElse(new Cart());
 

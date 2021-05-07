@@ -1,6 +1,5 @@
 package home.projects.groceryshop.steps;
 
-import home.projects.groceryshop.domain.Customer;
 import home.projects.groceryshop.domain.User;
 import home.projects.groceryshop.service.CustomerService;
 import home.projects.groceryshop.transfer.customer.CustomerResponse;
@@ -24,7 +23,7 @@ public class CustomerTestSteps {
 
     public CustomerResponse createCustomer() {
         User user = userTestSteps.createUser();
-        
+
         SaveCustomerRequest request = new SaveCustomerRequest();
         request.setUserId(user.getId());
         request.setFirstName("FirstName");

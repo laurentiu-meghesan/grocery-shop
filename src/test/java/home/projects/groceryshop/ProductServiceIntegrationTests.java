@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest
-public class ProductServiceIntegrationTests {
+class ProductServiceIntegrationTests {
 
     @Autowired
     private ProductService productService;

@@ -3,7 +3,6 @@ package home.projects.groceryshop;
 import home.projects.groceryshop.domain.User;
 import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.exception.UserAlreadyExistAuthenticationException;
-import home.projects.groceryshop.persistance.UserRepository;
 import home.projects.groceryshop.service.UserService;
 import home.projects.groceryshop.steps.UserTestSteps;
 import home.projects.groceryshop.transfer.user.ChangeUserPasswordRequest;
@@ -15,11 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.core.IsNull.notNullValue;
 
 @SpringBootTest
-public class UserServiceIntegrationTests {
+class UserServiceIntegrationTests {
 
     @Autowired
     private UserService userService;

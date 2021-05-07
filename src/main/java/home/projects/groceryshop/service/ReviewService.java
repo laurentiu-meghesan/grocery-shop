@@ -43,6 +43,4 @@ public class ReviewService {
 
         return new PageImpl<>(reviewsDtos, pageable, reviewsPage.getTotalElements());
     }
-
-
 }

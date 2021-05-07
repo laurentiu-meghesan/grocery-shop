@@ -21,6 +21,7 @@ public class Customer {
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
+    @JoinColumn(name = "id")
     private User user;
 
     public long getId() {

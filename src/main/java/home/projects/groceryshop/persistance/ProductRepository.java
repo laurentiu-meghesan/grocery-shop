@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByNameContainingAndQuantityGreaterThanEqual(String partialName, int minQuantity, Pageable pageable);
 
-//    @Query("SELECT product FROM Product product WHERE name LIKE '%:partialName%'")
+    //    @Query("SELECT product FROM Product product WHERE name LIKE '%:partialName%'")
     @Query(value = "SELECT * from product WHERE `name` LIKE '%?0%'", nativeQuery = true)
     Page<Product> findByPartialName(String partialName, Pageable pageable);
 }

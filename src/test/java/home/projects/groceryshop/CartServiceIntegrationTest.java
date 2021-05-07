@@ -1,7 +1,5 @@
 package home.projects.groceryshop;
 
-import home.projects.groceryshop.domain.Customer;
-import home.projects.groceryshop.domain.Product;
 import home.projects.groceryshop.service.CartService;
 import home.projects.groceryshop.steps.CustomerTestSteps;
 import home.projects.groceryshop.steps.ProductTestSteps;
@@ -24,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 @SpringBootTest
-public class CartServiceIntegrationTest {
+class CartServiceIntegrationTest {
 
     @Autowired
     private CartService cartService;

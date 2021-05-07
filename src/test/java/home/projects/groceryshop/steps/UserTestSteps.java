@@ -19,7 +19,7 @@ public class UserTestSteps {
 
     public User createUser() {
         SaveUserRequest request = new SaveUserRequest();
-        request.setUserName("user1");
+        request.setUserName("user4546");
         request.setPassword("1234");
         request.setRoles("USER");
         request.setActive(true);

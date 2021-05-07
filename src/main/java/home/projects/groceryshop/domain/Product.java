@@ -71,7 +71,7 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public Set<Cart> getCarts() {
+    Set<Cart> getCarts() {
         return carts;
     }
 
