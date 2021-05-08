@@ -7,6 +7,7 @@ import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.persistance.CustomerRepository;
 import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.customer.SaveCustomerRequest;
+import home.projects.groceryshop.transfer.customer.UpdateCustomerRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -68,12 +69,13 @@ public class CustomerService {
                 new ResourceNotFoundException("Customer " + id + " not found."));
     }
 
-    public CustomerResponse updateCustomer(long id, SaveCustomerRequest request) {
+    public CustomerResponse updateCustomer(long id, UpdateCustomerRequest request) {
         LOGGER.info("Updating customer {}: {}", id, request);
 
         Customer customer = findCustomer(id);
 
         BeanUtils.copyProperties(request, customer);
+
         Customer savedCustomer = customerRepository.save(customer);
 
         return mapCustomerResponse(savedCustomer);

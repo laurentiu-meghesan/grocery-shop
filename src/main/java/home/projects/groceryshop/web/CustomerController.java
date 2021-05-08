@@ -4,6 +4,7 @@ import home.projects.groceryshop.domain.Customer;
 import home.projects.groceryshop.service.CustomerService;
 import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.customer.SaveCustomerRequest;
+import home.projects.groceryshop.transfer.customer.UpdateCustomerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable long id, @Valid @RequestBody SaveCustomerRequest request) {
+    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable long id, @Valid @RequestBody UpdateCustomerRequest request) {
         CustomerResponse customer = customerService.updateCustomer(id, request);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }

@@ -32,7 +32,7 @@ public class UserService {
             throw new UserAlreadyExistAuthenticationException("User already exists, try picking another user name.");
         } else {
 
-            LOGGER.info("Creating user {}", request);
+            LOGGER.info("Creating user {}", request.getUserName());
             User user = new User();
             user.setUserName(request.getUserName());
             user.setPassword(request.getPassword());

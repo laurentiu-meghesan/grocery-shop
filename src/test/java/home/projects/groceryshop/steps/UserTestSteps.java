@@ -17,9 +17,10 @@ public class UserTestSteps {
     @Autowired
     private UserService userService;
 
+    //Each time a new user is created, it must have a different username, otherwise, UserAlreadyExists error is thrown
     public User createUser() {
         SaveUserRequest request = new SaveUserRequest();
-        request.setUserName("user4546");
+        request.setUserName("user777");
         request.setPassword("1234");
         request.setRoles("USER");
         request.setActive(true);

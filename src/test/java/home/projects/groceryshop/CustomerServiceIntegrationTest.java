@@ -6,6 +6,7 @@ import home.projects.groceryshop.steps.CustomerTestSteps;
 import home.projects.groceryshop.steps.UserTestSteps;
 import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.customer.SaveCustomerRequest;
+import home.projects.groceryshop.transfer.customer.UpdateCustomerRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,26 +29,26 @@ class CustomerServiceIntegrationTest {
         customerTestSteps.createCustomer();
     }
 
-//    not ready yet
-//    @Test
-//    void updateCustomer_whenValidRequest_thenCustomerIsUpdated() {
-//
-//        CustomerResponse customer = customerTestSteps.createCustomer();
-//
-//        SaveCustomerRequest request = new SaveCustomerRequest();
-//        request.setFirstName("Lulu");
-//        request.setLastName("Nebunu");
-//        request.setEmail("lulu@etc.com");
-//        request.setPhoneNumber("new nr 0777...");
-//
-//        CustomerResponse updatedCustomer = customerService.updateCustomer(customer.getId(), request);
-//
-//        assertThat(updatedCustomer, notNullValue());
-//        assertThat(updatedCustomer.getId(), is(request.getUserId()));
-//        assertThat(updatedCustomer.getFirstName(), is(request.getFirstName()));
-//        assertThat(updatedCustomer.getLastName(), is(request.getLastName()));
-//        assertThat(updatedCustomer.getEmail(), is(request.getEmail()));
-//        assertThat(updatedCustomer.getPhoneNumber(), is(request.getPhoneNumber()));
-//        assertThat(updatedCustomer.getAddress(), is(request.getAddress()));
-//    }
+    @Test
+    void updateCustomer_whenValidRequest_thenCustomerIsUpdated() {
+
+        CustomerResponse customer = customerTestSteps.createCustomer();
+
+        UpdateCustomerRequest request = new UpdateCustomerRequest();
+        request.setFirstName("Lulu");
+        request.setLastName("Nebunu");
+        request.setEmail("lulu@etc.com");
+        request.setPhoneNumber("new nr 0777...");
+        request.setAddress("strada strazilor");
+
+        CustomerResponse updatedCustomer = customerService.updateCustomer(customer.getId(), request);
+
+        assertThat(updatedCustomer, notNullValue());
+        assertThat(updatedCustomer.getId(), is(customer.getId()));
+        assertThat(updatedCustomer.getFirstName(), is(request.getFirstName()));
+        assertThat(updatedCustomer.getLastName(), is(request.getLastName()));
+        assertThat(updatedCustomer.getEmail(), is(request.getEmail()));
+        assertThat(updatedCustomer.getPhoneNumber(), is(request.getPhoneNumber()));
+        assertThat(updatedCustomer.getAddress(), is(request.getAddress()));
+    }
 }
