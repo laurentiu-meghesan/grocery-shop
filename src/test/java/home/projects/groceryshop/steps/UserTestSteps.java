@@ -20,7 +20,7 @@ public class UserTestSteps {
     //Each time a new user is created, it must have a different username, otherwise, UserAlreadyExists error is thrown
     public User createUser() {
         SaveUserRequest request = new SaveUserRequest();
-        request.setUserName("user777");
+        request.setUserName("user77");
         request.setPassword("1234");
         request.setRoles("USER");
         request.setActive(true);

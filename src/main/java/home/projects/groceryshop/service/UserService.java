@@ -3,6 +3,8 @@ package home.projects.groceryshop.service;
 import home.projects.groceryshop.domain.User;
 import home.projects.groceryshop.exception.ResourceNotFoundException;
 import home.projects.groceryshop.exception.UserAlreadyExistAuthenticationException;
+import home.projects.groceryshop.persistance.CartRepository;
+import home.projects.groceryshop.persistance.CustomerRepository;
 import home.projects.groceryshop.persistance.UserRepository;
 import home.projects.groceryshop.transfer.user.ChangeUserPasswordRequest;
 import home.projects.groceryshop.transfer.user.SaveUserRequest;
@@ -19,10 +21,14 @@ public class UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, CartRepository cartRepository, CustomerRepository customerRepository) {
         this.userRepository = userRepository;
+        this.cartRepository = cartRepository;
+        this.customerRepository = customerRepository;
     }
 
     public User createUser(SaveUserRequest request) throws UserAlreadyExistAuthenticationException {
@@ -69,6 +75,19 @@ public class UserService {
 
     public void deleteUser(long id) {
         LOGGER.info("Deleting user {}.", id);
-        userRepository.deleteById(id);
+
+        try {
+            cartRepository.deleteById(id);
+            customerRepository.deleteById(id);
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+
+            try {
+                customerRepository.deleteById(id);
+                userRepository.deleteById(id);
+            } catch (Exception e1) {
+                userRepository.deleteById(id);
+            }
+        }
     }
 }

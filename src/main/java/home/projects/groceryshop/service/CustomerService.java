@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import home.projects.groceryshop.domain.Customer;
 import home.projects.groceryshop.domain.User;
 import home.projects.groceryshop.exception.ResourceNotFoundException;
+import home.projects.groceryshop.persistance.CartRepository;
 import home.projects.groceryshop.persistance.CustomerRepository;
 import home.projects.groceryshop.transfer.customer.CustomerResponse;
 import home.projects.groceryshop.transfer.customer.SaveCustomerRequest;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,12 +26,14 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final ObjectMapper objectMapper;
     private final UserService userService;
+    private final CartRepository cartRepository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, ObjectMapper objectMapper, UserService userService) {
+    public CustomerService(CustomerRepository customerRepository, ObjectMapper objectMapper, UserService userService, CartRepository cartRepository) {
         this.customerRepository = customerRepository;
         this.objectMapper = objectMapper;
         this.userService = userService;
+        this.cartRepository = cartRepository;
     }
 
     @Transactional
@@ -83,6 +87,12 @@ public class CustomerService {
 
     public void deleteCustomer(long id) {
         LOGGER.info("Deleting customer {}.", id);
-        customerRepository.deleteById(id);
+
+        try {
+            cartRepository.deleteById(id);
+            customerRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            customerRepository.deleteById(id);
+        }
     }
 }
